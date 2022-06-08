@@ -7,6 +7,7 @@ import Header from '../../components/header/Header';
 import Featured from '../../components/Feature/Featured';
 import Footer from '../../components/footer/Footer';
 import PropertyList from '../../components/PropertyList/PropertyList';
+import FeaturedProperties from '../../components/FeaturedProperties/FeatruedProperties';
 
 const Home = () => {
     return (
@@ -17,6 +18,8 @@ const Home = () => {
                 <Featured/>
                 <h1 className='homeTitle'>Browse by property type</h1>
                 <PropertyList/>
+                 <h1 className='homeTitle'>Homes Guests Love</h1>
+                 <FeaturedProperties/>
             </div>
 
             <Footer/>
