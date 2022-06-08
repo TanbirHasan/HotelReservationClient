@@ -21,6 +21,7 @@ const Header = ({type}) => {
 
 
  const [openOptions, setOpenOptions] = useState(false);
+ const [destination , setDestination] = useState()
   const [options, setOptions] = useState({
     adult: 1,
     children: 0,
@@ -38,6 +39,11 @@ const Header = ({type}) => {
   };
 
   const navigate = useNavigate();
+
+
+  const handleSearch = () => {
+    navigate("/hotels",{ state: { destination, date, options } });
+  }
     return (
         <div className='header'>
             <div className={type === "list" ? "headerContainer listMode" : "headerContainer"}>
@@ -83,6 +89,7 @@ const Header = ({type}) => {
                   type="text"
                   placeholder="Where are you going?"
                   className="headerSearchInput"
+                  onChange={(e) => setDestination(e.target.value)}
              
                 />
               </div>
@@ -139,7 +146,7 @@ const Header = ({type}) => {
               </div>
                  <div className="headerSearchItem">
               
-                <button className='headerBtn'>Search</button>
+                <button className='headerBtn' onClick={handleSearch}>Search</button>
               </div>
               
               </div>
