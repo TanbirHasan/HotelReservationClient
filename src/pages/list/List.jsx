@@ -6,6 +6,7 @@ import Header from '../../components/header/Header';
 import "./List.css"
 import Navbar from '../../components/navbar/Navbar';
 import SearchItem from '../../components/SearchItem/SearchItem';
+import useFetch from "../../hooks/useFetch"
 
 const List = () => {
     const location = useLocation();
@@ -13,6 +14,10 @@ const List = () => {
    const [date,setDate] = useState(location.state.date);
     const [openDate, setOpenDate] = useState(false);
    const [options,setOptions] = useState(location.state.options);
+
+
+
+    const {data,loading,error,refetchData} = useFetch(`http://localhost:7000/api/hotels?city=${destination}`);
     return (
         <div>
       <Navbar />
@@ -86,15 +91,18 @@ const List = () => {
             <button>Search</button>
           </div>
           <div className="listResult">
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
+            {
+              loading ? "loading" : <>
+              {
+                data.map(item => (
+                   <SearchItem item={item} key={item._id} />
+                ))
+              }
+              
+              </>  
+            }
+        
+         
           </div>
         </div>
       </div>
