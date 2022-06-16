@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import "./Navbar.css"
 import {Link} from "react-router-dom"
+import { AuthContext } from '../../context/AuthContext';
+import { faWindowRestore } from '@fortawesome/free-regular-svg-icons';
 
 const Navbar = () => {
+      const {user, loading, error, dispatch } = useContext(AuthContext);
+
+
+
+      const handleLogout = () => {
+        localStorage.removeItem("user");
+
+         window.location.reload();
+      }
     return (
         <div className='navbar'>
             <div className='navContainer'>
@@ -12,8 +23,18 @@ const Navbar = () => {
                 </Link>
               
                 <div className="navItems">
-                    <button className="navButton">Register</button>
-                    <button className="navButton">Login</button>
+                    {
+                        !user &&  <button className="navButton">Register</button>
+                    }
+                    {
+                        user ? <button className="navButton" onClick={handleLogout}>Logout</button>  : <Link to="/login">
+                          <button className="navButton">Login</button>
+                    
+                    </Link>
+                    }
+                   
+                  
+                  
                 </div>
 
 
